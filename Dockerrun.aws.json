@@ -1,0 +1,34 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "samjbro/practice-multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "samjbro/practice-multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "samjbro/practice-multi-worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "samjbro/practice-multi-nginx",
+      "essential": true,
+      "portMappings": [
+        { 
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
